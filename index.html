@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>p0rtwalker</title>
+<link rel="icon" type="image/x-icon" href="/p/p.ico">
+<link rel="preload" fetchpriority="high" as="image" href="/p/p0rtwalker.avif" type="image/avif">
+<link rel="preload" href="/styles/plyr.css" as="style" onload="this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="/styles/plyr.css"></noscript>
+
+<style>
+body{
+  background-color:#000;
+  color:#2596be;
+  font-family:Arial,sans-serif;
+  text-align:center;
+  margin:0;
+  padding:0;
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+h1{margin:0;padding:0;}
+p{margin:10px 0;}
+p0{margin:10px 0;}
+
+a{
+  color:#2596be;
+  text-decoration:none;
+  margin:10px;
+  font-size:18px;
+}
+
+a:hover{text-decoration:underline;}
+
+.footer{font-size:14px;}
+
+.plyr{
+  width:100%;
+  max-width:600px;
+  margin:10px 0;
+  border-radius:20px;
+  overflow:hidden;
+  background: transparent !important;
+  box-shadow: none;
+}
+
+.plyr__controls{
+  border-radius:20px;
+  background: transparent !important;
+}
+
+:root{
+  --plyr-color-main:#000;
+  --plyr-video-background:#000;
+  --plyr-audio-background:#000;
+  --plyr-control-color:#2596be;
+  --plyr-audio-control-color:#2596be;
+  --plyr-progress-loading-background:#000;
+  --plyr-menu-border-shadow-color:#000;
+}
+
+.plyr--audio .plyr__controls{
+  background: transparent !important;
+}
+
+.plyr__controls button{
+  color:var(--plyr-control-color)!important;
+}
+
+.plyr__controls input[type="range"]{
+  color:var(--plyr-control-color)!important;
+}
+
+.image{
+  border-radius:20px;
+}
+
+.background-video{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-1;
+  display:none;
+}
+</style>
+</head>
+
+<body>
+
+<img fetchpriority="high" src="/p/p0rtwalker.avif" width="230" height="230" class="image">
+
+<h1>p0rtwalker</h1><!--contact: aHR0cHM6Ly9wYXN0ZWJpbi5jb20vdXFzNGZUR3QKVncjU3I+UCF6QSZ9N00zNi9mVy5oTmU=-->
+
+<p>lazy but stupid.</p>
+
+<div>
+  <a href="https://x.com/p0rtwalker" target="_blank">x/p0rtwalker</a>
+</div>
+
+<div>
+  <a href="https://github.com/p0rtwalker" target="_blank">github/p0rtwalker</a>
+</div>
+
+<div>
+  <a href="https://tryhackme.com/p/p0rtwalker" target="_blank">tryhackme/p/p0rtwalker</a>
+</div>
+
+<div>
+  <a href="https://app.hackthebox.com/profile/2000725" target="_blank">hackthebox/profile/2000725</a>
+</div>
+
+<div>
+<p>anyway, listen to this.</p>
+
+<!--songs: 1.Proem - Pinching Point 2.Boards of Canada - Music is Math 3.Funckarma - Holdgaze 4.Aphex Twin – Iz-Us 5.Aphex Twin - Vordhosbn 6. Wisp - Negions Fail-->
+
+<audio class="plyr" controls>
+  <source src="/s/Proem - Pinching Point.mp4" type="audio/mp3">
+</audio>
+
+<audio class="plyr" controls>
+  <source src="/s/Boards of Canada - Music is Math.mp4" type="audio/mp3">
+</audio>
+
+<audio class="plyr" controls>
+  <source src="/s/Funckarma - Holdgaze.mp4" type="audio/mp3">
+</audio>
+
+<audio class="plyr" controls>
+  <source src="/s/Aphex Twin – Iz-Us.mp3" type="audio/mp3">
+</audio>
+
+<audio class="plyr" controls>
+  <source src="/s/Aphex Twin - Vordhosbn.mp3" type="audio/mp3">
+</audio>
+
+<audio class="plyr" controls>
+  <source src="/s/Wisp - Negions Fail.mp4" type="audio/mp3">
+</audio>
+</div>
+
+<video id="background-video-1" class="background-video" loop muted>
+  <source src="/s/Proem - Pinching Point.mp4" type="video/mp4">
+</video>
+
+<video id="background-video-2" class="background-video" loop muted>
+  <source src="/s/Boards of Canada - Music is Math.mp4" type="video/mp4">
+</video>
+
+<video id="background-video-3" class="background-video" loop muted>
+  <source src="/s/Funckarma - Holdgaze.mp4" type="video/mp4">
+</video>
+
+
+<div class="footer">
+  <p>That's all I know how to write code. )</p>
+  <p>No JS or PY tracking. I don't even know how to write it.</p>
+  <p0>note: wake up.</p0>
+</div>
+
+<script defer src="/scripts/plyr.polyfilled.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+
+const players=Plyr.setup('.plyr',{
+controls:['play','progress','current-time']
+});
+
+const backgroundVideos=[
+document.getElementById('background-video-1'),
+document.getElementById('background-video-2'),
+document.getElementById('background-video-3')
+];
+
+function stopAllBackgroundVideos(){
+backgroundVideos.forEach(video=>{
+if(!video)return;
+video.style.display='none';
+video.pause();
+video.currentTime=0;
+});
+}
+
+players.forEach((player,index)=>{
+
+player.on('play',()=>{
+
+players.forEach(other=>{
+if(other!==player){
+other.pause();
+}
+});
+
+stopAllBackgroundVideos();
+
+const bg=backgroundVideos[index];
+if(!bg)return;
+
+bg.style.display='block';
+bg.currentTime=player.currentTime;
+bg.play();
+
+});
+
+player.on('pause',()=>{
+if(players.every(p=>p.paused)){
+stopAllBackgroundVideos();
+}
+});
+
+player.on('timeupdate',()=>{
+const bg=backgroundVideos[index];
+if(!bg)return;
+bg.currentTime=player.currentTime;
+});
+
+player.on('ended',()=>{
+if(players.every(p=>p.paused||p.ended)){
+stopAllBackgroundVideos();
+}
+});
+
+});
+
+},{passive:true});
+</script>
+
+</body>
+</html>
